@@ -1,0 +1,50 @@
+#include <iostream>
+int baza2(int a)
+{
+    int p, nr;
+    p = 1; nr = 0;
+    while (a != 0)
+    {
+        int r = a % 2;
+        nr = nr + r * p;
+        p = p * 10;
+        a = a / 2;
+    }
+    return nr;
+}
+int main()
+{
+    int a,b;
+    std::cout << "a=";
+    std::cin >> a;
+    std::cout << "b=";
+    std::cin >> b;
+    std::cout << "a++: " << a++ <<std::endl;
+    std::cout << "++a: " << ++a << std::endl;
+    std::cout << "a--: " << a-- << std::endl;
+    std::cout << "--a: " << --a << std::endl;
+    std::cout << "+a: " << +a << std::endl;
+    std::cout << "-a: " << -a << std::endl;
+    std::cout << "!a: " << !a << std::endl;
+    std::cout << "~a " << ~a<< std::endl;
+    std::cout << "sizeof(a): " << sizeof(a) << std::endl;
+    std::cout << "Operatori binari:"<< std::endl;
+    std::cout << "a+b: " << (a + b) << std::endl;
+    std::cout << "a-b: " << (a - b) << std::endl;
+    std::cout << "a*b: " << (a * b) << std::endl;
+    std::cout << "a/b: " << (a / b) << std::endl;
+    std::cout << "a==b: " << (a==b) << std::endl;
+    std::cout << "a!=b: " << (a!=b) << std::endl;
+    std::cout << "a/b: " << (a / b) << std::endl;
+    std::cout << "a<b: " << (a < b) << std::endl;
+    std::cout << "a>b: " << (a > b) << std::endl;
+    std::cout << "a<=b: " << (a <= b) << std::endl;
+    std::cout << "a>=b: " << (a >= b) << std::endl;
+    std::cout << "a&&b: " << (a && b) << std::endl;
+    std::cout << "a||b: " << (a || b) << std::endl;
+    std::cout << "a&b: " << (a & b) << std::endl;
+    std::cout << "a|b: " << (a | b) << std::endl;
+    std::cout << "a^b: " << (a ^ b) << std::endl;
+    std::cout << "a<<2: " << (a << 2) << std::endl;
+    std::cout << "a>>2: " << (a >> 2)  << std::endl;
+}
