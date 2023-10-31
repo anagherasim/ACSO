@@ -1,0 +1,64 @@
+.686
+.model flat, c
+.stack 100h
+
+printf PROTO arg1 : Ptr Byte , printlist:VARARG
+		; adaugarea argumentului printlist:VARARG este necesara deoarece functiaprintf va
+		; avea multe argumente , vezi directiva INVOKE de mai jos
+scanf PROTO arg2 : Ptr Byte , inputlist:VARARG
+.DATA
+nri1_f byte "%d" , 0
+mesaj1_f byte 0Ah , "% s" , 0
+mesaj2_f byte 0Ah , "% s%d" , 0Ah , 0Ah , 0
+mesaj1 byte "Introdu un numar intreg pentru nr1 :" , 0
+mesaj2 byte "Numarul intreg nr2 este : " , 0
+nr1 sdword ? ; primul numar
+nr2 sdword ? ; al doilea numar
+.CODE
+main PROC
+INVOKE printf, ADDR mesaj1_f, ADDR mesaj1
+INVOKE scanf , ADDR nri1_f, ADDR nr1
+; ADDR joaca rolul lui & din sintaxa functiei scanf
+mov eax , nr1
+mov nr2 , eax
+INVOKE printf, ADDR mesaj2_f , ADDR mesaj2 , nr2
+ret
+main endp
+end
+
+
+
+
+.686
+.model flat, c
+.stack 100h
+
+printf PROTO arg1 : Ptr Byte , printlist:VARARG
+scanf PROTO arg2 : Ptr Sdword , inputlist:VARARG
+
+.data
+in1fmt byte "%d",0
+msg1fmt byte 0Ah , "% s" ,0
+msg2fmt byte "% s ",0
+msg3fmt byte 0Ah , "% s%d " ,0Ah , 0Ah , 0
+msg1 byte "Introduceti numarul de volti :" ,0
+msg2 byte "Introduceti numarul de ohmi :" ,0
+msg3 byte "Numarul de volti este :" ,0
+volti sdword ? ; numarul de volti
+ohmi sdword ? ; numarul de ohm
+amperi sdword ? ; numarul de amperi
+.code
+main proc
+INVOKE printf , ADDR msg1fmt , ADDR msg1
+INVOKE scanf , ADDR in1fmt , ADDR volti
+INVOKE printf , ADDR msg2fmt , ADDR msg2
+INVOKE scanf , ADDR in1fmt , ADDR ohmi
+; amperi = volti/ohmi
+mov eax , volti ; incarc numarul de volti in eax
+cdq ; ce utilitate are aceasta comanda?
+idiv ohmi ; impart eax la ohmi
+mov amperi , eax ; stochez eax in amperi
+INVOKE printf , ADDR msg3fmt , ADDR msg3 , amperi
+ret
+main endp
+end
