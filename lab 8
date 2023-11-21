@@ -1,0 +1,28 @@
+    .686
+    .model flat,c
+    .stack 100h
+
+    .const
+    Polinom      dword 1, 2, 3
+    x            dword 2
+    n            dword($-Polinom)/sizeof(dword)
+
+    .code
+Horner proc
+        mov eax,[Polinom]               
+        mov edi,1
+        mov ecx, 4        
+
+buclaHorner:
+        imul eax,[x]                ;*x
+        add eax,[Polinom+4*edi]     ;+a_m-i
+        inc edi                     ;incrementam
+        cmp edi,n
+        jp @F
+        loop buclaHorner            ;decrementam
+        mov esi,eax
+@@:
+        ret
+
+main endp
+     end
